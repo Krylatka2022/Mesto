@@ -28,6 +28,7 @@
 @media screen and (max-width: 584px) {
   .popup__close {
     left: 87%;
+    top: 6.5%;
   }
 }
 .popup__close:hover {
