@@ -1,0 +1,7 @@
+.element__image {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  width: 100%;
+}
