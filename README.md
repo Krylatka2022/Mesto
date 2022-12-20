@@ -31,7 +31,6 @@
 
 Проект проверен на соответствие макету при помощи **PerfectPixel** для Chrome и **Pixel Perfect Pro** для Firefox
 
-https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg
 
 ### Особенности и отличия от предыдущей версии
 
