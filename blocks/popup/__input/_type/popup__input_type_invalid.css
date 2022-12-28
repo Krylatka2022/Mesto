@@ -1,0 +1,8 @@
+.popup__input_type_invalid {
+  opacity: 20%;
+  transition: opacity 0.5s linear;
+  padding-bottom: 5px;
+  margin: 0;
+  border: none;
+  border-bottom: solid 1px #ff0000;
+}

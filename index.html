@@ -69,31 +69,41 @@
           name="popupCloseProfile"
         ></button>
         <form
-          class="popup__form"
-          name = "profileFormElement"
-          >
+          class="popup__form popup__form_type_profile"
+          name="profileFormElement"
+          novalidate
+        >
+          <!--novalidate-->
           <h2 class="popup__title">Редактировать&nbsp;профиль</h2>
           <input
             class="popup__input popup__input_type_name"
+            id="inputName"
             type="text"
             placeholder="Имя"
             name="inputName"
             minlength="2"
             maxlength="40"
-          />
+            required
+          /><!--required-->
+          <span class="popup__error" id="inputName-error"></span>
           <input
             class="popup__input popup__input_type_about"
+            id="inputAbout"
             type="text"
             placeholder="О себе"
             name="inputAbout"
             minlength="2"
             maxlength="200"
-          />
+            required
+          /><!--required-->
+          <span class="popup__error" id="inputAbout-error"></span>
           <button
-            class="popup__submit-button"
+            class="popup__submit-button popup__submit-button_disabled"
             type="submit"
             name="submitButton"
+            disabled
           >
+            <!--disabled-->
             Сохранить
           </button>
         </form>
@@ -107,30 +117,43 @@
           name="popupCloseCards"
           aria-label="Закрыть"
         ></button>
-        <form class="popup__form popup__form_type_add" name="popupFormElementAdd">
+        <form
+          class="popup__form popup__form_type_add"
+          name="popupFormElementAdd"
+          novalidate
+        >
+          <!--novalidate-->
           <h2 class="popup__title">Новое место</h2>
           <input
             class="popup__input popup__input_type_name-card"
+            id="inputNameCard"
             type="text"
             placeholder="Название"
             name="inputNameCard"
             minlength="2"
-            maxlength="40"
-          />
+            maxlength="30"
+            required
+          /><!--required-->
+          <span class="popup__error" id="inputNameCard-error"></span>
           <input
             class="popup__input popup__input_type_url-card"
+            id="inputUrlCard"
             type="url"
             placeholder="Ссылка на картинку"
             name="inputUrlCard"
             minlength="2"
             maxlength="200"
             pattern="https://.*"
-          />
+            required
+          /><!--required-->
+          <span class="popup__error" id="inputUrlCard-error"></span>
           <button
-            class="popup__submit-button"
+            class="popup__submit-button popup__submit-button_disabled"
             type="submit"
             name="submitButton"
+            disabled
           >
+            <!--disabled---->
             Создать
           </button>
         </form>
@@ -153,6 +176,7 @@
         <h2 class="popup__preview-title" name="popupPreviewTitle"></h2>
       </div>
     </section>
+    <script src="./scripts/validation.js"></script>
     <script src="./scripts/index.js"></script>
   </body>
 </html>

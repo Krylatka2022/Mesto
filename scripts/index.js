@@ -22,7 +22,6 @@ const popupPreview = document.querySelector('.popup_type_preview'); // попа�
 const popupPreviewImage = popupPreview.querySelector('.popup__preview-image'); //для увеличения фото, большая картинка;
 const popupPreviewTitle = popupPreview.querySelector('.popup__preview-title'); //для увеличения фото, надпись под большой картинкой
 const popupClosePreview = document.querySelector('.popup__close_type-preview'); ////для увеличения фото, кнопка-контейнер
-
 const initialCards = [{
 	name: 'Архыз',
 	link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -43,30 +42,37 @@ const initialCards = [{
 	link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
 }];
 
-//открыть любой попап
+
+//открыть любой попап - рефакторинг 4+6 спринт
 function openPopup(popup) {
 	popup.classList.add('popup_opened');
+	document.addEventListener('keydown', HandleEscapeDown);
+	popup.addEventListener('click', closePopupOverlay(popup));
+
 };
 
-//закрыть любой попап
+//закрыть любой попап - рефакторинг 4+6 спринт
 function closePopup(popup) {
 	popup.classList.remove('popup_opened');
+	document.removeEventListener('keydown', HandleEscapeDown);
+	popup.removeEventListener('click', closePopupOverlay(popup));
 };
 
-//Универсальный слушатель на закрытие всех попапов
+//Универсальный слушатель на закрытие всех попапов по "крестику"
 
 // находим все крестики проекта по универсальному селектору
 const closeButtons = document.querySelectorAll('.popup__close');
 
 closeButtons.forEach((button) => {
-	// находим 1 раз ближайший к крестику попап
+	// находим 1 раз ближайший к "крестику" popup
 	const popup = button.closest('.popup');
 	// устанавливаем обработчик закрытия на крестик
 	button.addEventListener('click', () => { closePopup(popup); });
 });
 
 initialCards.forEach(renderElement);
-//Добавили карточки из массива, к ним лайки и удаление карточек
+
+//Добавили карточки из массива, к ним лайки и удаление карточек - 5 спринт
 function createElements(item) {
 	const elementItem = elementTemplate.cloneNode(true); //клонируем элементы template
 	const elementTitle = elementItem.querySelector('.element__title'); //получаем элемент - название карточки
@@ -96,24 +102,22 @@ function createElements(item) {
 	return elementItem; //возвращаем готовый элемент по шаблону template
 }
 
-//функция создает карточку через createElements и добавляет ее в DOM
+//функция создает карточку через createElements и добавляет ее в DOM - 5 спринт
 function renderElement(item) {
 	const elementCard = createElements(item);
 	elements.append(elementCard);
 }
 
-//Слушатель на открытие попапа добавления карточек.
+//Рефакторинг слушателя на открытие попапа добавления карточек - 5+6 спринт
 profileCardsAddButton.addEventListener('click', function () {
-	openPopup(popupCards)
+	submitButton = popupFormElementAdd.querySelector(validationConfig.submitButtonSelector);
+	submitButton.classList.add(validationConfig.inactiveButtonClass);
+	submitButton.setAttribute('disabled', true);
+	//popupFormElementAdd.reset();
+	openPopup(popupCards);
 });
-/*
-//Слушатель на закрытие попап добавления карточек
-popupCloseCards.addEventListener('click', function () {
-	closePopup(popupCards)
-});
-*/
 
-//Функция кнопки Создать (карточку), по данным пользователя, обновляя значения для последующего добавления
+//Функция кнопки Создать (карточку), по данным пользователя, обновляя значения для последующего добавления - 5 спринт
 function handleFormSubmitCards(evt) {
 	evt.preventDefault();
 	const newCard = {
@@ -121,28 +125,20 @@ function handleFormSubmitCards(evt) {
 		link: inputUrlCard.value // добавляем ссылку
 	};
 
-	elements.prepend(createElements(newCard)); //добавляем в начало eElements
+	elements.prepend(createElements(newCard)); //добавляем в начало Elements
 	evt.target.reset(); //перезаписываем значения
 	closePopup(popupCards); //закрываем попап
 };
 
-//Слушатель на форму добавления карточек после создания
+//Слушатель на форму добавления карточек после создания - 5 спринт
 popupFormElementAdd.addEventListener('submit', handleFormSubmitCards);
 
-/*
-//Слушатель на закрытие popup__preview
-popupClosePreview.addEventListener('click', function () {
-	closePopup(popupPreview)
-});
-*/
-
-//Функция открыть попап "редактировать профиль" - 4 спринт, модернизация//
+//Рефакторинг функции открыть попап "редактировать профиль" - 4+5 спринт
 /*Вызываем, добавляем класс при нажатии, отражаем в инпут-полях имя, заданное изначально по умолчанию*/
 profileButton.addEventListener('click', function () { //Отслеживаем событие 'open'
 	openPopup(popupProfileEdit);
 	inputName.value = profileTitle.textContent;
 	inputAbout.value = profileSubtitle.textContent;
-	//closePopup(popupProfileEdit);
 });
 
 /*Корректируем текст попапа "редактировать профиль", сохраняем, добавляеи в 'profile' - 4 спринт*/
@@ -156,10 +152,22 @@ function handleFormSubmitProfile(evt) {
 //Слушатель на событие корректирования попапа "редактировать профиль"
 profileFormElement.addEventListener('submit', handleFormSubmitProfile);
 
-/*
-//Слушатель на событие закрытия попап редактировать профиль
-popupCloseProfile.addEventListener('click', function () {
-	closePopup(popupProfileEdit);
-});
-*/
+
+//закрываем попап по нажатию кнопки Escape - 6 спринт
+function HandleEscapeDown(evt) {
+	if (evt.key === 'Escape') {
+		const popupOpened = document.querySelector('.popup_opened');
+		closePopup(popupOpened);
+	}
+}
+
+//закрываем попап по клику на оверлей - 6 спринт
+function closePopupOverlay(popup) {
+	popup.addEventListener('click', function (evt) {
+		if (!evt.target.closest('.popup__container')) {
+			closePopup(popup);
+		}
+	})
+}
+
 

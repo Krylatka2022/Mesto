@@ -1,0 +1,5 @@
+.popup__submit-button_disabled {
+  opacity: 20%;
+  transition: opacity 0.5s linear;
+  border: solid 1px #000;
+}

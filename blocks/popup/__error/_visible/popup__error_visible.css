@@ -1,0 +1,5 @@
+.popup__error_visible {
+  visibility: visible;
+  padding-top: 6px;
+  padding-bottom: 3px;
+}
