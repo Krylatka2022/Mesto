@@ -42,27 +42,23 @@ const initialCards = [{
 	link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
 }];
 
-
 //открыть любой попап - рефакторинг 4+6 спринт
 function openPopup(popup) {
 	popup.classList.add('popup_opened');
-	document.addEventListener('keydown', HandleEscapeDown);
+	document.addEventListener('keydown', handleEscapeDown);
 	popup.addEventListener('click', closePopupOverlay(popup));
-
 };
 
 //закрыть любой попап - рефакторинг 4+6 спринт
 function closePopup(popup) {
 	popup.classList.remove('popup_opened');
-	document.removeEventListener('keydown', HandleEscapeDown);
+	document.removeEventListener('keydown', handleEscapeDown);
 	popup.removeEventListener('click', closePopupOverlay(popup));
 };
 
 //Универсальный слушатель на закрытие всех попапов по "крестику"
-
 // находим все крестики проекта по универсальному селектору
 const closeButtons = document.querySelectorAll('.popup__close');
-
 closeButtons.forEach((button) => {
 	// находим 1 раз ближайший к "крестику" popup
 	const popup = button.closest('.popup');
@@ -98,7 +94,6 @@ function createElements(item) {
 		popupPreviewImage.alt = item.name;
 		openPopup(popupPreview);
 	});
-
 	return elementItem; //возвращаем готовый элемент по шаблону template
 }
 
@@ -113,7 +108,7 @@ profileCardsAddButton.addEventListener('click', function () {
 	submitButton = popupFormElementAdd.querySelector(validationConfig.submitButtonSelector);
 	submitButton.classList.add(validationConfig.inactiveButtonClass);
 	submitButton.setAttribute('disabled', true);
-	//popupFormElementAdd.reset();
+	popupFormElementAdd.reset();
 	openPopup(popupCards);
 });
 
@@ -124,9 +119,8 @@ function handleFormSubmitCards(evt) {
 		name: inputNameCard.value, // добавляем название
 		link: inputUrlCard.value // добавляем ссылку
 	};
-
-	elements.prepend(createElements(newCard)); //добавляем в начало Elements
-	evt.target.reset(); //перезаписываем значения
+elements.prepend(createElements(newCard)); //добавляем в начало Elements
+evt.target.reset(); //перезаписываем значения
 	closePopup(popupCards); //закрываем попап
 };
 
@@ -154,7 +148,7 @@ profileFormElement.addEventListener('submit', handleFormSubmitProfile);
 
 
 //закрываем попап по нажатию кнопки Escape - 6 спринт
-function HandleEscapeDown(evt) {
+function handleEscapeDown(evt) {
 	if (evt.key === 'Escape') {
 		const popupOpened = document.querySelector('.popup_opened');
 		closePopup(popupOpened);
