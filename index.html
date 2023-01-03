@@ -74,28 +74,30 @@
           novalidate
         >
           <h2 class="popup__title">Редактировать&nbsp;профиль</h2>
-          <input
-            class="popup__input popup__input_type_name"
-            id="inputName"
-            type="text"
-            placeholder="Имя"
-            name="inputName"
-            minlength="2"
-            maxlength="40"
-            required
-          />
-          <span class="popup__error" id="inputName-error"></span>
-          <input
-            class="popup__input popup__input_type_about"
-            id="inputAbout"
-            type="text"
-            placeholder="О себе"
-            name="inputAbout"
-            minlength="2"
-            maxlength="200"
-            required
-          />
-          <span class="popup__error" id="inputAbout-error"></span>
+          <label class="popup__label">
+            <input
+              class="popup__input popup__input_type_name"
+              id="inputName"
+              type="text"
+              placeholder="Имя"
+              name="inputName"
+              minlength="2"
+              maxlength="40"
+              required />
+            <span class="popup__error" id="inputName-error"></span
+          ></label>
+          <label class="popup__label">
+            <input
+              class="popup__input popup__input_type_about"
+              id="inputAbout"
+              type="text"
+              placeholder="О себе"
+              name="inputAbout"
+              minlength="2"
+              maxlength="200"
+              required />
+            <span class="popup__error" id="inputAbout-error"></span
+          ></label>
           <button
             class="popup__submit-button popup__submit-button_disabled"
             type="submit"
@@ -120,29 +122,31 @@
           novalidate
         >
           <h2 class="popup__title">Новое место</h2>
-          <input
-            class="popup__input popup__input_type_name-card"
-            id="inputNameCard"
-            type="text"
-            placeholder="Название"
-            name="inputNameCard"
-            minlength="2"
-            maxlength="30"
-            required
-          />
-          <span class="popup__error" id="inputNameCard-error"></span>
-          <input
-            class="popup__input popup__input_type_url-card"
-            id="inputUrlCard"
-            type="url"
-            placeholder="Ссылка на картинку"
-            name="inputUrlCard"
-            minlength="2"
-            maxlength="200"
-            pattern="https://.*"
-            required
-          />
-          <span class="popup__error" id="inputUrlCard-error"></span>
+          <label class="popup__label">
+            <input
+              class="popup__input popup__input_type_name-card"
+              id="inputNameCard"
+              type="text"
+              placeholder="Название"
+              name="inputNameCard"
+              minlength="2"
+              maxlength="30"
+              required />
+            <span class="popup__error" id="inputNameCard-error"></span
+          ></label>
+          <label class="popup__label">
+            <input
+              class="popup__input popup__input_type_url-card"
+              id="inputUrlCard"
+              type="url"
+              placeholder="Ссылка на картинку"
+              name="inputUrlCard"
+              minlength="2"
+              maxlength="200"
+              pattern="https://.*"
+              required />
+            <span class="popup__error" id="inputUrlCard-error"></span
+          ></label>
           <button
             class="popup__submit-button popup__submit-button_disabled"
             type="submit"

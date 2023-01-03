@@ -71,20 +71,10 @@ function enableValidation(config) {
     // сделаем из них массив методом Array.from
     const forms = document.querySelectorAll(config.formSelector); //находим все формы
     // Переберём полученную коллекцию
-    forms.forEach((formSelector) => {
+    forms.forEach((formElement) => {
         // Для каждой формы вызовем функцию setEventListeners,
         // передав ей элемент формы
-        setEventListeners(formSelector, config);
-        const inputs = formSelector.querySelectorAll(config.inputSelector); //находим все инпуты
-        const submitButton = formSelector.querySelector(config.submitButtonSelector); //находим кнопку сабмита
-        formSelector.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-        })
-        inputs.forEach(function(inputSelector) {
-            inputSelector.addEventListener('input', () => {
-                checkValidateInput(formSelector, inputSelector, config); //проверяем валидность инпутов
-            });
-        });
+        setEventListeners(formElement, config);
     })
 }
 const validationConfig = {

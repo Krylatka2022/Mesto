@@ -4,10 +4,10 @@
   position: relative;
   max-width: 430px;
   display: flex;
-  padding: 35px 37px 35px;
+  padding: 34px 36px 37px;
   color: #000;
   box-sizing: border-box;
-  flex-direction: column;
+  margin: auto;
 }
 
 @media screen and (max-width: 768px) {

@@ -12,7 +12,7 @@ const inputNameCard = document.querySelector('.popup__input_type_name-card'); //
 const inputUrlCard = document.querySelector('.popup__input_type_url-card'); //ok // поле для ссылки добавленной карточки
 const popupCloseCards = document.querySelector('.popup__close_type-cards'); //ok //кнопка закрытия попапа для добавления карточек
 const elementTemplate = document.querySelector('#element-template').content.querySelector('.element'); //element из template для добавления в elements
-const elements = document.querySelector('.elements'); //ok // контейнер, куда добавляются элементы из массива
+const elementsContainer = document.querySelector('.elements'); //ok // контейнер, куда добавляются элементы из массива
 const elementImg = document.querySelector('.element__image'); //ok
 const elementTitle = document.querySelector('.element__title'); //ok
 const elementLike = document.querySelector('.element__like');
@@ -46,15 +46,13 @@ const initialCards = [{
 function openPopup(popup) {
 	popup.classList.add('popup_opened');
 	document.addEventListener('keydown', handleEscapeDown);
-	popup.addEventListener('click', closePopupOverlay(popup));
 };
 
 //закрыть любой попап - рефакторинг 4+6 спринт
 function closePopup(popup) {
 	popup.classList.remove('popup_opened');
 	document.removeEventListener('keydown', handleEscapeDown);
-	popup.removeEventListener('click', closePopupOverlay(popup));
-};
+	};
 
 //Универсальный слушатель на закрытие всех попапов по "крестику"
 // находим все крестики проекта по универсальному селектору
@@ -62,7 +60,8 @@ const closeButtons = document.querySelectorAll('.popup__close');
 closeButtons.forEach((button) => {
 	// находим 1 раз ближайший к "крестику" popup
 	const popup = button.closest('.popup');
-	// устанавливаем обработчик закрытия на крестик
+	// устанавливаем обработчик закрытия на крестик и overlay
+	popup.addEventListener('mousedown', closePopupOverlay(popup));
 	button.addEventListener('click', () => { closePopup(popup); });
 });
 
@@ -100,7 +99,7 @@ function createElements(item) {
 //функция создает карточку через createElements и добавляет ее в DOM - 5 спринт
 function renderElement(item) {
 	const elementCard = createElements(item);
-	elements.append(elementCard);
+	elementsContainer.append(elementCard);
 }
 
 //Рефакторинг слушателя на открытие попапа добавления карточек - 5+6 спринт
@@ -119,8 +118,7 @@ function handleFormSubmitCards(evt) {
 		name: inputNameCard.value, // добавляем название
 		link: inputUrlCard.value // добавляем ссылку
 	};
-elements.prepend(createElements(newCard)); //добавляем в начало Elements
-evt.target.reset(); //перезаписываем значения
+elementsContainer.prepend(createElements(newCard)); //добавляем в начало Elements
 	closePopup(popupCards); //закрываем попап
 };
 
@@ -157,10 +155,10 @@ function handleEscapeDown(evt) {
 
 //закрываем попап по клику на оверлей - 6 спринт
 function closePopupOverlay(popup) {
-	popup.addEventListener('click', function (evt) {
-		if (!evt.target.closest('.popup__container')) {
+	popup.addEventListener('mousedown', function (evt) {
+		if (evt.target == popup) {
 			closePopup(popup);
-		}
+		} 
 	})
 }
 

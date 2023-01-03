@@ -2,9 +2,8 @@
   color: #ff0000;
   font-size: 12px;
   line-height: 1.21;
-  margin-top: 5px;
   display: block;
-  height: 25px;
+  min-height: 30px;
   max-width: 358px;
   visibility: hidden;
 }

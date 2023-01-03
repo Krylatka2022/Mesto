@@ -9,20 +9,8 @@
   top: 0;
   left: 0;
   justify-content: center;
-  /* margin: 195px auto auto; */
-  /* opacity: 0;
-  /*инициатива не по брифу*/
   visibility: hidden;
-  /*z-index: -1;   подсказонька
-  transition: opacity 1s, visibility 0s 1s, z-index 0s 1s;*/
   width: 100%;
   height: 100%;
-  padding-top: 189px;
-  align-items: flex-start;
-}
-
-@media screen and (max-width: 768px) {
-  .popup {
-    padding-top: 123px;
-  }
+  align-items: center;
 }
