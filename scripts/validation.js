@@ -1,28 +1,28 @@
 
 //функция показать ошибку
-function showError(formSelector, inputSelector, config) { //ok
+function showError(formElement, inputSelector, config) { //ok
     // Находим элемент ошибки внутри самой функции
-    const errorElement = formSelector.querySelector(`#${inputSelector.id}-error`);
+    const errorElement = formElement.querySelector(`#${inputSelector.id}-error`);
     // Остальной код такой же
     errorElement.classList.add(config.errorClass);
     errorElement.textContent = inputSelector.validationMessage;
     inputSelector.classList.add(config.inputErrorClass);
 }
 //функция убрать показ ошибки
-function hideError(formSelector, inputSelector, config) { //ok
+function hideError(formElement, inputSelector, config) { //ok
     // Находим элемент ошибки
-    const errorElement = formSelector.querySelector(`#${inputSelector.id}-error`);
+    const errorElement = formElement.querySelector(`#${inputSelector.id}-error`);
     // Остальной код такой же
     errorElement.classList.remove(config.errorClass);
     errorElement.textContent = '';
     inputSelector.classList.remove(config.inputErrorClass)
 }
 //функция проверки валидности инпутов 
-function checkValidateInput(formSelector, inputSelector, config) { //ok
+function checkValidateInput(formElement, inputSelector, config) { //ok
     if (!inputSelector.validity.valid) {
-        showError(formSelector, inputSelector, config);
+        showError(formElement, inputSelector, config);
     } else {
-        hideError(formSelector, inputSelector, config);
+        hideError(formElement, inputSelector, config);
     }
 }
 //проверить валидность полей. // Функция принимает массив полей
@@ -50,19 +50,19 @@ function toggleButtonState(inputs, submitButton, config) {
     }
 }
 //функция слушателя для проверки валидности инпута 
-function setEventListeners(formSelector, config) {
+function setEventListeners(formElement, config) {
     // Найдём все поля формы и сделаем из них массив
-    const inputs = Array.from(formSelector.querySelectorAll(config.inputSelector));
+    const inputs = Array.from(formElement.querySelectorAll(config.inputSelector));
     // Найдём в текущей форме кнопку отправки
-    const submitButton = formSelector.querySelector(config.submitButtonSelector);
+    const submitButton = formElement.querySelector(config.submitButtonSelector);
     toggleButtonState(inputs, submitButton, config);
     inputs.forEach((inputSelector) => {
         inputSelector.addEventListener('input', () => {
-            checkValidateInput(formSelector, inputSelector, config);
+            checkValidateInput(formElement, inputSelector, config);
             // Вызовем toggleButtonState и передадим ей массив полей и кнопку
             toggleButtonState(inputs, submitButton, config);
         });
-        hideError(formSelector, inputSelector, config);
+        hideError(formElement, inputSelector, config);
     });
 }
 

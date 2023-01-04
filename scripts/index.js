@@ -61,7 +61,7 @@ closeButtons.forEach((button) => {
 	// находим 1 раз ближайший к "крестику" popup
 	const popup = button.closest('.popup');
 	// устанавливаем обработчик закрытия на крестик и overlay
-	popup.addEventListener('mousedown', closePopupOverlay(popup));
+	closePopupOverlay(popup);
 	button.addEventListener('click', () => { closePopup(popup); });
 });
 
