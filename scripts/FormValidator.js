@@ -1,4 +1,6 @@
 
+export  {validationConfig as config, showError, hideError, checkValidateInput, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation }
+//import { popupFormElementAdd } from "./index.js";
 //функция показать ошибку
 function showError(formElement, inputSelector, config) { //ok
     // Находим элемент ошибки внутри самой функции
@@ -48,6 +50,7 @@ function toggleButtonState(inputs, submitButton, config) {
         submitButton.classList.remove(config.inactiveButtonClass);
         submitButton.disabled = false;
     }
+   
 }
 //функция слушателя для проверки валидности инпута 
 function setEventListeners(formElement, config) {
@@ -64,6 +67,11 @@ function setEventListeners(formElement, config) {
         });
         hideError(formElement, inputSelector, config);
     });
+    formElement.addEventListener('reset', () => {
+        setTimeout(() => {
+           toggleButtonState(inputs, submitButton, config);
+        }, 0)
+      })
 }
 
 function enableValidation(config) {
