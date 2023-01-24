@@ -43,7 +43,7 @@ export default class FormValidator {
 	//функция, которая делает кнопку сабмита неактивной и наоборот, дизейбл кнопки
 	// Функция принимает массив полей ввода
 	// и элемент кнопки, состояние которой нужно менять
-	_toggleButtonState() {
+	toggleButtonState() {
 		const hasInvalidInput = this._inputs.some((inputElement) => !inputElement.validity.valid);
 
 		if (hasInvalidInput) { //если есть ошибки // Если есть хотя бы один невалидный инпут
@@ -59,17 +59,23 @@ export default class FormValidator {
 
 	// Cлушатель для добавления сообщений об ошибках при заполнении полей формы
 	_setEventListeners = () => {
-		this._toggleButtonState();
-		this._inputs.forEach(inputSelector => {
-			inputSelector.addEventListener('input', () => {
-				this._checkValidateInput(inputSelector);
-				this._toggleButtonState();
-			});
-		});
-	}
+		this.toggleButtonState();
+		this._inputs.forEach(inputElement => {
+			inputElement.addEventListener('input', () => {
+				this._checkValidateInput(inputElement);
+				this.toggleButtonState();
+			}); // Для обнуления кнопки "создать"
+			this._form.addEventListener('reset', () => {
+				setTimeout(() => {
+					this.toggleButtonState();
+				}, 0)
+			})
+		})
+	};
 
 	//Запуск выполнения методов класса
 	enableValidation = () => {
 		this._setEventListeners();
 	};
 }
+

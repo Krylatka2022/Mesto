@@ -124,13 +124,16 @@ function closePopupOverlay(popup) {
 //функция создает карточку через createElements и добавляет ее в DOM - 5 спринт + 7 спринт
 function renderElement(item) {
 	const element = new Card(item, '#element-template', handleCardClick);
-
 	const cardElement = element.createElements();
-	elementsContainer.prepend(cardElement);
+	return cardElement
+};
+
+function elementsPrepend(item) {
+	elementsContainer.prepend(renderElement(item));
 }
 
 initialCards.forEach((item) => {
-	renderElement(item);
+	elementsPrepend(item);
 })
 popupFormElementAdd.addEventListener('submit', handleFormSubmitCards);
 
@@ -142,9 +145,10 @@ profileCardsAddButton.addEventListener('click', function () {
 //Функция кнопки Создать (карточку), по данным пользователя, обновляя значения для последующего добавления - 5 спринт + 7 спринт
 function handleFormSubmitCards(evt) {
 	evt.preventDefault();
-	renderElement({
+	elementsPrepend({
 		name: inputNameCard.value, // добавляем название
 		link: inputUrlCard.value // добавляем ссылку
 	});
+	//evt.target.reset();
 	closePopup(popupCards); //закрываем попап
 };

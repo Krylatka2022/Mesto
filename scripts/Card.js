@@ -4,16 +4,16 @@ export default class Card {
 		item,
 		templateSelector,
 		handleCardClick,
-		popupPreviewImage,
+		//popupPreviewImage,
 	) {
 		this._item = item;
 		this._templateSelector = templateSelector;
 		this._handleCardClick = handleCardClick;
-		this._popupPreviewImage = popupPreviewImage;
+		//this._popupPreviewImage = popupPreviewImage;
 	};
 
 	_deleteElement = () => {
-		this._cardElement.remove(); //ok
+		this._cardElement.remove() == null;
 	}
 
 	_likeElement = () => {
@@ -24,7 +24,7 @@ export default class Card {
 	_setListenersItems() {
 		this._elementDelete.addEventListener('click', this._deleteElement);
 		this._elementLike.addEventListener('click', this._likeElement);
-		this._popupPreviewImage.addEventListener('click', () => this._handleCardClick(this._item))
+		this._elementImg.addEventListener('click', () => this._handleCardClick(this._item))
 	}
 
 	_getTemplate() {
@@ -41,18 +41,17 @@ export default class Card {
 
 	createElements() {
 		this._element = this._getTemplate();//ok
-		const elementImg = this._cardElement.querySelector('.element__image'); //найдем картинку и запишем в переменную чтобы не искать несколько раз
-		const elementTitle = this._cardElement.querySelector('.element__title'); //заголовок
+		this._elementImg = this._cardElement.querySelector('.element__image'); //найдем картинку и запишем в переменную чтобы не искать несколько раз
+		this._elementTitle = this._cardElement.querySelector('.element__title'); //заголовок
 		this._elementDelete = this._cardElement.querySelector('.element__delete');
 		this._elementLike = this._cardElement.querySelector('.element__like'); //добавляем функциональность лайкам
-		this._popupPreviewImage = this._cardElement.querySelector('.element__image');
 
-		elementTitle.textContent = this._item.name;//ok
-		elementImg.alt = this._item.name;//ok
-		elementImg.src = this._item.link;//ok
+		this._elementTitle.textContent = this._item.name;//ok
+		this._elementImg.alt = this._item.name;//ok
+		this._elementImg.src = this._item.link;//ok
 
 		this._setListenersItems();
-		return this._cardElement;
+		return this._element;
 	}
 }
 
