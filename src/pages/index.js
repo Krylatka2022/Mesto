@@ -89,7 +89,7 @@ function handleCardClick(name, link) {
 
 const popupAddCardForm = new PopupWithForm('.popup_cards', (item) => {
 
-	cardElementList.addItem(createdCard(item));
+	cardElementList.addItem(createdCard({ name: item.inputNameCard, link: item.inputUrlCard }));
 	popupAddCardForm.close();
 });
 
@@ -126,7 +126,7 @@ profileCardsAddButton.addEventListener('click', function () {
 const popupEditProfileForm = new PopupWithForm('.popup_profile', formValues)
 
 function formValues(data) {
-	userInfo.setUserInfo(data);
+	userInfo.setUserInfo({ name: data.inputName, info: data.inputAbout });
 	popupEditProfileForm.close();
 }
 
