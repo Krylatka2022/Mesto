@@ -32,15 +32,6 @@ export default class PopupWithForm extends Popup {
 		super.setEventListeners();
 	}
 
-	// setInputValues(data) {
-	// 	this._inputs.forEach((input) => {
-	// 		// вставляем в `value` инпута данные из объекта по атрибуту `name` этого инпута
-	// 		if (data[input.name]) {
-	// 			input.value = data[input.name];
-	// 		}
-	// 	});
-	// }
-
 	/** перезаписать родительский метод close */
 	close() {
 

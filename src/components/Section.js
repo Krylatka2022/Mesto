@@ -12,16 +12,8 @@ export default class Section {
 			this._renderer(item));
 	};
 
-
 	// универсальный метод, который формирует карточку и отрисовывает ее на странице (в начале списка);
 	addItem(item) {
 		this._container.prepend(item);
 	}
-
-	// //   формирует карточку и отрисовывает ее на странице (в конце списка)
-	// addItemAppend(item) {
-	// 	this._container.append(item);
-	// }
-
-
 }

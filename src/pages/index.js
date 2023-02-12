@@ -4,27 +4,8 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/../components/PopupWithImage.js";
+import { initialCards } from "../utils/initialCards.js";
 import "./index.css";
-
-const initialCards = [{
-	name: 'Архыз',
-	link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-}, {
-	name: 'Челябинская область',
-	link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-}, {
-	name: 'Иваново',
-	link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-}, {
-	name: 'Камчатка',
-	link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-}, {
-	name: 'Холмогорский район',
-	link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-}, {
-	name: 'Байкал',
-	link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-}];
 
 const validationConfig = {
 	formSelector: '.popup__form', //ok
@@ -61,30 +42,13 @@ const validatePopupFormElementAdd = new FormValidator(validationConfig, popupFor
 validatePopupFormElementAdd.enableValidation();
 
 // Функция попапа увеличения картинки - ok
-const PopupBigImage = new PopupWithImage('.popup_type_preview')
-PopupBigImage.setEventListeners()
+const popupBigImage = new PopupWithImage('.popup_type_preview')
+popupBigImage.setEventListeners()
 
 function handleCardClick(name, link) {
-	PopupBigImage.open(name, link);
+	popupBigImage.open(name, link);
 }
 
-
-//pnrf
-
-// const userInfo = new UserInfo({ inputName, inputAbout });
-// /** Изменить имя и описание профиля */
-// const popupEditProfile = new PopupWithForm({
-// 	// popupElement: popupProfileEdit,
-// 	handleFormSubmit: (inputValues) => {
-// 		userInfo.setUserInfo({
-// 			username: inputValues.name,
-// 			aboutSelf: inputValues.about
-
-// 		});
-// 		popupEditProfile.close();
-// 	}
-// });
-// popupEditProfile.setEventListeners();
 //-------------------Карточки---------------------------
 
 const popupAddCardForm = new PopupWithForm('.popup_cards', (item) => {
@@ -117,7 +81,7 @@ cardElementList.renderItems()
 
 //Открываем и обновляем попап с карточками
 profileCardsAddButton.addEventListener('click', function () {
-	// validatePopupFormElementAdd.resetValidation();
+	validatePopupFormElementAdd.resetValidation();
 	// validatePopupFormElementAdd.toggleButtonState();
 	popupAddCardForm.open();
 })
@@ -140,7 +104,7 @@ const userInfo = new UserInfo({
 
 
 profileButton.addEventListener('click', () => {
-	// validatePopupProfileEdit.resetValidation();           //Очистка ошибок, после открытия попапа.
+	validatePopupProfileEdit.resetValidation();           //Очистка ошибок, после открытия попапа.
 	validatePopupProfileEdit.toggleButtonState();            // Валидация кнопки при открытии попапа.
 	const { name, info } = userInfo.getUserInfo()
 	inputName.value = name;
