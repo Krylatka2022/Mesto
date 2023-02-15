@@ -5,6 +5,7 @@ import UserInfo from "../components/UserInfo.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/../components/PopupWithImage.js";
 import { initialCards } from "../utils/initialCards.js";
+import { token, cohort } from "../utils/autorization.js"
 import "./index.css";
 
 const validationConfig = {
