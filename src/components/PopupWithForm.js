@@ -6,10 +6,7 @@ export default class PopupWithForm extends Popup {
 		this._handleFormSubmit = handleFormSubmit;
 		this._popupForm = this._popupSelector.querySelector('.popup__form');
 		this._inputs = this._popupSelector.querySelectorAll('.popup__input');
-
 		this._submitButtonElement = this._popupSelector.querySelector('.popup__submit-button');
-
-
 	}
 
 	/** _getInputValues - приватный метод: собрать данные всех полей формы. */
@@ -37,5 +34,13 @@ export default class PopupWithForm extends Popup {
 
 		this._popupForm.reset();
 		super.close();
+	}
+	/** изменить текст кнопки submit в процессе обмена данными с сервером */
+	renderLoading(isLoading) {
+		if (isLoading === true) {
+			this._submitButtonElement.textContent = 'Сохранение...';
+		} else {
+			this._submitButtonElement.textContent = 'Сохранить';
+		}
 	}
 }
