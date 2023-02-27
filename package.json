@@ -2,7 +2,7 @@
   "name": "mesto",
   "version": "1.0.0",
   "description": "Learning platform",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve",
