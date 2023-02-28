@@ -63,19 +63,8 @@ validatePopupFormElementAdd.enableValidation();
 const validateAvatar = new FormValidator(validationConfig, popupFormAvatar);
 validateAvatar.enableValidation();
 
-// // Получить данные c сервера или вывести сообщение об ошибке
-// Promise.all([api.getUserInfo(), api.getInitialCards()])
-// 	.then(([data, initialCards]) => {
-// 		// userId = data._id;
-// 		userInfo.setUserInfo(data); //Установка данных пользователя на странице ({ userName: data.inputName, userInfo: data.inputAbout, userAvatar: data.avatar, userId: data._id });
-// 		// userInfo.getUserId = data._id; // сохраняем id текущего пользователя
-// 		// userInfo.setUserInfo(data.avatar);//установка аватарки
-// 		cardElementList.renderItems(initialCards);
-// 	})
-// 	.catch((err) => { console.log(err) })
-// 	.finally(() => { })
-
 let userId = null
+
 //-------------------Карточки---------------------------
 
 // Создание новой карточки
@@ -109,6 +98,16 @@ const createNewCard = (data) => {
 	return newCard.createElements()
 }
 
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([data, items]) => {
+    userInfo.setUserInfo(data)
+    // userInfo.setUserAvatar(user.avatar)
+    userId = data._id
+    renderInitialCards(items)
+  })
+  .catch((err) => {
+    console.log(err)
+  })
 const handleDeleteClick = (id, card) => {
 	popupConfirmation.renderLoading(true);
 	api
@@ -139,22 +138,19 @@ const userInfo = new UserInfo({
 	userAvatar: '.profile__avatar'
 })
  
-api.getInitialCards().then((res) => {cardElementList.renderItems(res)}).catch((err) => {console.log(`Ошибка: ${err}`)});
-api.getUserInfo().then((data) => {userInfo.setUserInfo(data);
-userId=data._id;
-}).catch((err) => {console.log(`Ошибка: ${err}`)});
-
 //-------Класс Section. ------------------------------------
 const cardElementList = new Section(
 	{
 	 data: initialCards,
 		renderer: (item) => {
-			cardElementList.addItem(createNewCard(item))
+			cardElementList.addItemAppend(createNewCard(item))
 		},
 	},
 	elementsContainer
 )
-
+const renderInitialCards = (items) => {
+	cardElementList.renderItems(items)
+  }
 //Добавление новой карточки 
 const popupAddCardForm = new PopupWithForm('.popup_cards', 
 (data) => {

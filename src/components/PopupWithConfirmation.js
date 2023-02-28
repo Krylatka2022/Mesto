@@ -3,8 +3,8 @@ import Popup from './Popup.js'
 export default class PopupWithConfirmation extends Popup {
     constructor(selector, handleDeleteClick) {
         super(selector);
-        this._submitButton = this._popupSelector.querySelector('.popup__submit-button');
-        this._popupForm = this._popupSelector.querySelector('.popup__form');
+        this._submitButton = this._popupElement.querySelector('.popup__submit-button');
+        this._popupForm = this._popupElement.querySelector('.popup__form');
         this._handleDeleteClick = handleDeleteClick;
     }
 
