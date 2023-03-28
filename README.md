@@ -1,4 +1,4 @@
-# МЕСТО [MESTO](https://krylatka2022.github.io/MESTO/)
+# МЕСТО ([MESTO](https://krylatka2022.github.io/MESTO/))
 
 ### Обзор
 
