@@ -1,4 +1,4 @@
-# МЕСТО ([MESTO](https://krylatka2022.github.io/MESTO/))
+# МЕСТО ([Mesto](https://krylatka2022.github.io/Mesto/))
 
 ### Обзор
 
@@ -9,8 +9,8 @@
 *- это учебный проект по основам JavaScript на курсе "веб-разработчик" в Яндекс.Практикуме. Процесс выполнения данной работы состоит из нескольких двухнедельных спринтов (**4-9 спринты**), с каждым спринтом код меняется и дополняется*
 
 **Мои предыдущие работы:**
-- "Научиться учиться" ([HOW-TO-LEARN](https://krylatka2022.github.io/HOW-TO-LEARN/)) - 1-ый спринт;
-- "Путешествие по России" ([RUSSIAN-TRAVEL](https://krylatka2022.github.io/russian-travel/)) - 2-3 спринты;
+- "Научиться учиться" ([How-to-learn](https://krylatka2022.github.io/How-to-learn/)) - 1-ый спринт;
+- "Путешествие по России" ([Russian-travel](https://krylatka2022.github.io/Russian-travel/)) - 2-3 спринты;
 
 ### Стек технологий:
 * HTML 5
